@@ -1,0 +1,47 @@
+name: library/version
+on:
+  workflow_call:
+    outputs:
+      nextversion:
+        description: version to build
+        value: ${{ jobs.version.outputs.nextversion }}
+      currentversion:
+        description: the latest current version
+        value: ${{ jobs.version.outputs.currentversion }}
+      type:
+        description: type of the change
+        value: ${{ jobs.version.outputs.type }}
+      prerelease:
+        description: is the release a prerelease
+        value: ${{ jobs.version.outputs.prerelease }}
+      changelog:
+        description: changelog
+        value: ${{ jobs.version.outputs.changelog }}
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      nextversion: ${{ steps.version.outputs.nextversion }}
+      currentversion: ${{ steps.version.outputs.currentversion }}
+      prerelease: ${{ steps.version.outputs.prerelease }}
+      type: ${{ steps.version.outputs.type }}
+      changelog: ${{ steps.version.outputs.changelog }}
+      instance: ${{ steps.version.outputs.instance }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: |
+          cd .github/actions/bumpup
+          npm install
+          npm run build
+      - uses: ./.github/actions/bumpup
+        name: Run danielrichter.codes/bumpup@v1
+        id: version
+      - uses: thejeff77/action-push-tag@v1.0.0
+        if: ${{ steps.version.outputs.type != 'none' }}
+        with:
+          tag: ${{ steps.version.outputs.nextversion }}
+          message: ${{ steps.version.outputs.nextversion }}

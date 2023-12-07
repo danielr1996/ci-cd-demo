@@ -1,0 +1,14 @@
+name: 'bumpup'
+description: 'bump version'
+outputs:
+  nextversion:
+    description: version to build
+  currentversion:
+    description: the latest current version
+  type:
+    description: type of the change
+  prerelease:
+    description: is the release a prerelease
+runs:
+  using: 'node20'
+  main: 'dist/index.js'

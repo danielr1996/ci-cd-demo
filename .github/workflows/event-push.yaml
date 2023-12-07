@@ -1,0 +1,23 @@
+name: events/push
+on:
+  push:
+    branches:
+      - '**'
+jobs:
+  version:
+    uses: ./.github/workflows/library-version.yaml
+    permissions:
+      contents: write
+    secrets: inherit
+  build:
+    if: ${{ needs.version.outputs.type != 'none'  }}
+    needs: version
+    permissions:
+      contents: write
+      packages: write
+    uses: ./.github/workflows/library-build.yaml
+    with:
+      tag:  ${{ needs.version.outputs.nextversion }}
+      prerelease:  ${{ needs.version.outputs.prerelease == 'true' }}
+      changelog:  ${{ needs.version.outputs.changelog }}
+    secrets: inherit

@@ -1,0 +1,1 @@
+export const match = (tests)=> tests.filter(([test])=>test).map(([_,value])=>value)[0]

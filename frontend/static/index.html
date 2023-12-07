@@ -1,0 +1,51 @@
+<html lang="en">
+<head>
+    <title>CI/CD Demo</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: rgb(0, 45, 82);
+            color: #fafafa;
+            font-family: Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        h1{
+            font-size: 6rem;
+        }
+        p{
+            font-size: 1.5rem;
+        }
+
+        .title{
+            font-weight: bold;
+        }
+
+        .grid{
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            row-gap: 1rem;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <h1>CI/CD Demo</h1>
+    <p>
+        <span class="grid">
+            <span class="title">Version: </span><span id="version"></span>
+            <span class="title">Revision: </span><span id="revision"></span>
+            <span class="title">Date: </span><span id="date"></span>
+        </span>
+    </p>
+</main>
+<script type="module">
+    const URL="--URL--"
+    const {version, revision, date} = await (await fetch(URL)).json()
+    document.getElementById('version').innerText=version
+    document.getElementById('revision').innerText=revision
+    document.getElementById('date').innerText=new Date(date).toLocaleString()
+</script>
+</body>
+</html>

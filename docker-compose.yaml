@@ -1,0 +1,21 @@
+services:
+  backend:
+    container_name: demo_backend
+    image: ghcr.io/danielr1996/ci-cd-demo/backend:0.0.3
+    build:
+      context: backend
+      args:
+        VERSION: "1"
+        REVISION: "1"
+        DATE: "1"
+    ports:
+      - "8080:8080"
+  frontend:
+    container_name: demo_frontend
+    image: ghcr.io/danielr1996/ci-cd-demo/frontend:0.0.3
+    build:
+      context: frontend
+    environment:
+      URL: "http://localhost:8080"
+    ports:
+      - "3000:3000"
