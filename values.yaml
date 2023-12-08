@@ -1,5 +1,7 @@
 frontend:
   backendUrl: https://backend.demo.prod.danielrichter.codes
+  image:
+    pullPolicy: Always
   ingress:
     enabled: true
     annotations:
@@ -14,6 +16,8 @@ frontend:
         hosts:
           - frontend.demo.prod.danielrichter.codes
 backend:
+  image:
+    pullPolicy: Always
   ingress:
     enabled: true
     annotations:

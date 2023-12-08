@@ -40,14 +40,14 @@ jobs:
       - uses: ./.github/actions/bumpup
         name: Run danielrichter.codes/bumpup@v1
         id: version
-      - uses: crazy-max/ghaction-import-gpg@v6
+      - if: ${{ steps.version.outputs.type != 'none' }}
+        uses: crazy-max/ghaction-import-gpg@v6
         with:
           gpg_private_key: ${{ secrets.GPG_KEY }}
           git_user_signingkey: true
           git_commit_gpgsign: true
           git_tag_gpgsign: true
-      - name: List keys
-        run: gpg -K
-      - run: |
+      - if: ${{ steps.version.outputs.type != 'none' }}
+        run: |
           git tag -a "${{ steps.version.outputs.nextversion }}" -m "${{ steps.version.outputs.nextversion }}" 
           git push origin "${{ steps.version.outputs.nextversion }}"
