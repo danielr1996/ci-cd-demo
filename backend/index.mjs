@@ -6,3 +6,4 @@ const server = http.createServer((req, res) =>{
     res.end(JSON.stringify(buildmeta));
 });
 server.listen(8080,'0.0.0.0')
+console.log('Started to listen on 0.0.0.0:8080')

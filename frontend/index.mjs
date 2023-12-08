@@ -10,4 +10,5 @@ http.createServer(async (req, res)=>{
     res.writeHead(200,{'Content-Type': 'text/html',});
     res.end(indexHtml.replace('--URL--', process.env[URL] || 'http://localhost:8080'));
 
-}).listen(3000);
+}).listen(3000,'0.0.0.0');
+console.log('Started to listen on 0.0.0.0:3000')
