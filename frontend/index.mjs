@@ -8,7 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 http.createServer(async (req, res)=>{
     const indexHtml = await fs.readFile(path.join(__dirname, './static/index.html'),{encoding: 'utf-8'})
     res.writeHead(200,{'Content-Type': 'text/html',});
-    res.end(indexHtml.replace('--URL--', process.env[URL] || 'http://localhost:8080'));
+    res.end(indexHtml.replace('--URL--', process.env['URL'] || 'http://localhost:8080'));
 
 }).listen(3000,'0.0.0.0');
-console.log('Started to listen on 0.0.0.0:3000')
+console.log('Started to listen on 0.0.0.0:3000, configured backend: '+process.env['URL'])

@@ -1,5 +1,5 @@
 frontend:
-  backendUrl: backend.demo.prod.danielrichter.codes
+  backendUrl: https://backend.demo.prod.danielrichter.codes
   ingress:
     enabled: true
     annotations:
