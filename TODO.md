@@ -1,0 +1,4 @@
+- update tickets with relevant information
+- execute tests and publish results to sonarqube
+- kubernetes validating webhook to ensure only approved images can be deployed
+- ensure that only allowed base images are used
