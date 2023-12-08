@@ -1,0 +1,52 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: test
+  namespace: ci-cd-demo
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: ci-cd-demo
+      version: '0.1.0'
+      sourceRef:
+        kind: HelmRepository
+        name: ci-cd-demo
+        namespace: ci-cd-demo
+      interval: 1m
+  values:
+    frontend:
+      fullnameOverride: test
+      backendUrl: https://backend.demo.test.danielrichter.codes
+      image:
+        pullPolicy: Always
+      ingress:
+        enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-prod"
+        hosts:
+          - host: frontend.demo.test.danielrichter.codes
+            paths:
+              - path: /
+                pathType: ImplementationSpecific
+        tls:
+          - secretName: frontend.demo.test.danielrichter.codes
+            hosts:
+              - frontend.demo.test.danielrichter.codes
+    backend:
+      fullnameOverride: test
+      image:
+        pullPolicy: Always
+      ingress:
+        enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-prod"
+        hosts:
+          - host: backend.demo.test.danielrichter.codes
+            paths:
+              - path: /
+                pathType: ImplementationSpecific
+        tls:
+          - secretName: backend.demo.test.danielrichter.codes
+            hosts:
+              - backend.demo.test.danielrichter.codes

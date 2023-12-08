@@ -1,0 +1,30 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: ghcr
+  namespace: ci-cd-demo
+spec:
+  type: oci
+  interval: 1m
+  secretRef:
+    name: flux-oci
+  url: oci://ghcr.io/danielr1996
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: flux-oci
+  namespace: ci-cd-demo
+stringData:
+  username: "danielr1996"
+  password: "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"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ghcr.io-ips
+  namespace: ci-cd-demo
+data:
+  .dockerconfigjson: >-
+    eyJhdXRocyI6eyJnaGNyLmlvIjp7InVzZXJuYW1lIjoiZGFuaWVscjE5OTYiLCJwYXNzd29yZCI6ImdocF9ST0pwU2lydE11VWdJejBNNjcyVHhFd0VUdjd6a3UxSEdxeEMiLCJhdXRoIjoiWkdGdWFXVnNjakU1T1RZNloyaHdYMUpQU25CVGFYSjBUWFZWWjBsNk1FMDJOekpVZUVWM1JWUjJOM3ByZFRGSVIzRjRRdz09In19fQ==
+type: kubernetes.io/dockerconfigjson
