@@ -16,7 +16,6 @@ spec:
       interval: 1m
   values:
     frontend:
-      fullnameOverride: test
       backendUrl: https://backend.demo.test.danielrichter.codes
       image:
         pullPolicy: Always
@@ -34,7 +33,6 @@ spec:
             hosts:
               - frontend.demo.test.danielrichter.codes
     backend:
-      fullnameOverride: test
       image:
         pullPolicy: Always
       ingress:
