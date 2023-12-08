@@ -11,7 +11,7 @@ spec:
       version: '0.1.0'
       sourceRef:
         kind: HelmRepository
-        name: ci-cd-demo
+        name: ghcr
         namespace: ci-cd-demo
       interval: 1m
   values:
