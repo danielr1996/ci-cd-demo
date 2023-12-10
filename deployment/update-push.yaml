@@ -11,8 +11,6 @@ spec:
     checkout:
       ref:
         branch: main
-    push:
-      branch: releases
     commit:
       author:
         name: Daniel Richter
