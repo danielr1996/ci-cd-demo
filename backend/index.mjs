@@ -4,7 +4,7 @@ import buildmeta from "./buildmeta.json" assert { type: 'json' };
 const server = http.createServer((req, res) =>{
     res.writeHead(200,{'Content-Type': 'application/json','Access-Control-Allow-Origin': '*'});
     res.end(JSON.stringify({
-        buildmeta,
+        ...buildmeta,
         environment: process.env['ENVIRONMENT']
     }));
 });
