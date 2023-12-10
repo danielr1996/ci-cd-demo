@@ -1,0 +1,29 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: ghcr.io-danielr1996-de-ci-cd-demo
+spec:
+  image: ghcr.io/danielr1996/ci-cd-demo
+  interval: 1m
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: latest-prerelease
+spec:
+  imageRepositoryRef:
+    name: ghcr.io-danielr1996-de-ci-cd-demo
+  policy:
+    semver:
+      range: ">0.0.0-0"
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: latest-stable
+spec:
+  imageRepositoryRef:
+    name: ghcr.io-danielr1996-de-ci-cd-demo
+  policy:
+    semver:
+      range: ">0.0.0"

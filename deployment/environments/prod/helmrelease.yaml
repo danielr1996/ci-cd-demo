@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: test
+  name: prod
 spec:
   interval: 1m
   chart:
@@ -15,7 +15,7 @@ spec:
       interval: 1m
   values:
     frontend:
-      backendUrl: https://backend.test.demo.danielrichter.codes
+      backendUrl: https://backend.demo.danielrichter.codes
       image:
         pullPolicy: Always
       ingress:
@@ -23,14 +23,14 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-prod"
         hosts:
-          - host: frontend.test.demo.danielrichter.codes
+          - host: frontend.demo.danielrichter.codes
             paths:
               - path: /
                 pathType: ImplementationSpecific
         tls:
-          - secretName: frontend.test.demo.danielrichter.codes
+          - secretName: frontend.demo.danielrichter.codes
             hosts:
-              - frontend.test.demo.danielrichter.codes
+              - frontend.demo.danielrichter.codes
     backend:
       image:
         pullPolicy: Always
@@ -39,11 +39,11 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-prod"
         hosts:
-          - host: backend.test.demo.danielrichter.codes
+          - host: backend.demo.danielrichter.codes
             paths:
               - path: /
                 pathType: ImplementationSpecific
         tls:
-          - secretName: backend.test.demo.danielrichter.codes
+          - secretName: backend.demo.danielrichter.codes
             hosts:
-              - backend.test.demo.danielrichter.codes
+              - backend.demo.danielrichter.codes
