@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - '**'
+      - '!releases'
+      - '!releases/**'
 jobs:
   version:
     uses: ./.github/workflows/library-version.yaml

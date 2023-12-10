@@ -12,7 +12,7 @@ spec:
       ref:
         branch: main
     push:
-      branch: release
+      branch: releases
     commit:
       author:
         name: Daniel Richter
