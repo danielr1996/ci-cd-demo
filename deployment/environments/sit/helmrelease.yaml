@@ -32,6 +32,7 @@ spec:
             hosts:
               - frontend.sit.demo.danielrichter.codes
     backend:
+      environment: SIT
       image:
         pullPolicy: Always
       ingress:

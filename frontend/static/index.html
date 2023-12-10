@@ -39,14 +39,16 @@
             <span class="title">Version: </span><span id="version"></span>
             <span class="title">Revision: </span><span id="revision"></span>
             <span class="title">Date: </span><span id="date"></span>
+            <span class="title">Environment: </span><span id="environment"></span>
         </span>
     </p>
 </main>
 <script type="module">
     const URL="--URL--"
-    const {version, revision, date} = await (await fetch(URL)).json()
+    const {version, revision, date,environment} = await (await fetch(URL)).json()
     document.getElementById('version').innerText=version
     document.getElementById('revision').innerText=revision
+    document.getElementById('environment').innerText=environment
     document.getElementById('date').innerText=new Date(date).toLocaleString()
 </script>
 </body>
