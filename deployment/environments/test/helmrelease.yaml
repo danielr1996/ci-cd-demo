@@ -32,6 +32,7 @@ spec:
             hosts:
               - frontend.test.demo.danielrichter.codes
     backend:
+      environment: Test
       image:
         pullPolicy: Always
       ingress:

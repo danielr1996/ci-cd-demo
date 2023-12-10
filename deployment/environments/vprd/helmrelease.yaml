@@ -32,6 +32,7 @@ spec:
             hosts:
               - frontend.vprd.demo.danielrichter.codes
     backend:
+      environment: VPRD
       image:
         pullPolicy: Always
       ingress:
