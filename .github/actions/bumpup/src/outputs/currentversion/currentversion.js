@@ -1,8 +1,19 @@
 import {git, fs, semver} from '../../deps.js'
 
-export const currentversion = async(dir)=>{
+export const currentversion = async(dir, branch)=>{
     let tags = await git.listTags({ fs,dir})
-    return tags.sort(semverComparator)[0] || '0.0.0';
+    return tags
+        .filter(f(branch))
+        .sort(semverComparator)[0] || '0.0.0';
+}
+
+const f = (branch)=>(tag)=>{
+    const version = new semver.SemVer((tag))
+    const isPre = version.prerelease.length >0
+    if(isPre){
+        return version.prerelease[0] === branch.replace('/','-')
+    }
+    return true
 }
 
 const semverComparator = (a,b)=>{

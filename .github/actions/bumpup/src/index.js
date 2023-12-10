@@ -20,13 +20,13 @@ const dobump = async (dir, branchname, currentversion,messages)=>{
     core.info("nextversion="+nextversion);
     core.setOutput("nextversion", nextversion);
 
-    core.info("changelog="+changelog);
-    core.setOutput("changelog", changelog);
+    // core.info("changelog="+changelog);
+    // core.setOutput("changelog", changelog);
 }
 
 const dir = '.'
 const branchname = await getBranchname(dir)
-const currentversion = await getCurrentVersion(dir)
+const currentversion = await getCurrentVersion(dir, branchname)
 const commitMessages = await getCommitMessages(currentversion, dir)
 const messages = commitMessages.map(parseCommitMessage)
 dobump(dir, branchname, currentversion,messages).catch((error)=>core.setFailed(error.message))
