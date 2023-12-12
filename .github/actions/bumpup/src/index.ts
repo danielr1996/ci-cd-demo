@@ -11,7 +11,7 @@ try{
     const branchname = await getBranchname(dir)
     const currentversion = await getCurrentVersion(dir, branchname)
     const messages = (await getCommitMessages(currentversion, dir)).map(parseCommitMessage)
-    console.log(messages)
+
     const {prerelease,type,nextversion, changelog} = await bumpup(branchname,currentversion,messages)
 
     core.info("prerelease="+prerelease);
