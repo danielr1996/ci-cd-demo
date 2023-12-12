@@ -4,8 +4,14 @@ import {currentversion as getCurrentVersion} from "./outputs/currentversion/curr
 import {getCommitMessages} from "./lib/git/getCommitMessages.js";
 import {parseCommitMessage} from "./outputs/type/parseCommitMesage.js";
 import {bumpup} from "./lib/index.js";
+import {findBaseDir} from "./lib/git/findBaseDir.js";
 
-const dobump = async (branchname, currentversion,messages)=>{
+try{
+    const dir = await findBaseDir()
+    const branchname = await getBranchname(dir)
+    const currentversion = await getCurrentVersion(dir, branchname)
+    const messages = (await getCommitMessages(currentversion, dir)).map(parseCommitMessage)
+    console.log(messages)
     const {prerelease,type,nextversion, changelog} = await bumpup(branchname,currentversion,messages)
 
     core.info("prerelease="+prerelease);
@@ -22,11 +28,7 @@ const dobump = async (branchname, currentversion,messages)=>{
 
     core.info("changelog="+changelog);
     core.setOutput("changelog", changelog);
+}catch (error: any){
+    core.setFailed(error.message)
 }
-
-const dir = '.'
-const branchname = await getBranchname(dir)
-const currentversion = await getCurrentVersion(dir, branchname)
-const messages = (await getCommitMessages(currentversion, dir)).map(parseCommitMessage)
-dobump(branchname, currentversion,messages).catch((error)=>core.setFailed(error.message))
 

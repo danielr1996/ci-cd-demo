@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "ncc build src/index.ts"
+    "build": "ncc build src/index.ts",
+    "test": "node --experimental-vm-modules ./node_modules/.bin/jest",
+    "bumpup": "node --loader ts-node/esm src/index.ts"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +16,7 @@
     "@actions/github": "^6.0.0",
     "@vercel/ncc": "^0.38.1",
     "conventional-commits-parser": "^5.0.0",
+    "find-up": "^7.0.0",
     "isomorphic-git": "^1.25.0",
     "semver": "^7.5.4",
     "ts-node": "^10.9.2",
