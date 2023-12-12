@@ -1,36 +1,36 @@
-apiVersion: image.toolkit.fluxcd.io/v1beta1
-kind: ImageUpdateAutomation
-metadata:
-  name: update-push
-spec:
-  interval: 1m
-  sourceRef:
-    kind: GitRepository
-    name: github.com-danielr1996-ci-cd-demo
-  git:
-    checkout:
-      ref:
-        branch: main
-    commit:
-      author:
-        name: Daniel Richter
-        email: danielr1996@users.noreply.github.com
-      messageTemplate: |
-        Automated image update
-        
-        Automation name: {{ .AutomationObject }}
-        
-        Files:
-        {{ range $filename, $_ := .Updated.Files -}}
-        - {{ $filename }}
-        {{ end -}}
-        
-        Objects:
-        {{ range $resource, $_ := .Updated.Objects -}}
-        - {{ $resource.Kind }} {{ $resource.Name }}
-        {{ end -}}
-        
-        Images:
-        {{ range .Updated.Images -}}
-        - {{.}}
-        {{ end -}}
+#apiVersion: image.toolkit.fluxcd.io/v1beta1
+#kind: ImageUpdateAutomation
+#metadata:
+#  name: update-push
+#spec:
+#  interval: 1m
+#  sourceRef:
+#    kind: GitRepository
+#    name: github.com-danielr1996-ci-cd-demo
+#  git:
+#    checkout:
+#      ref:
+#        branch: main
+#    commit:
+#      author:
+#        name: Daniel Richter
+#        email: danielr1996@users.noreply.github.com
+#      messageTemplate: |
+#        Automated image update
+#
+#        Automation name: {{ .AutomationObject }}
+#
+#        Files:
+#        {{ range $filename, $_ := .Updated.Files -}}
+#        - {{ $filename }}
+#        {{ end -}}
+#
+#        Objects:
+#        {{ range $resource, $_ := .Updated.Objects -}}
+#        - {{ $resource.Kind }} {{ $resource.Name }}
+#        {{ end -}}
+#
+#        Images:
+#        {{ range .Updated.Images -}}
+#        - {{.}}
+#        {{ end -}}

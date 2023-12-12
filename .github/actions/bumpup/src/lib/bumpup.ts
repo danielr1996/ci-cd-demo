@@ -19,7 +19,7 @@
 // ]), "none");
 //
 // const getCommitType = (isPre, currentversion)=>(message) => match([
-//     [isPre, 'prerelease.js'],
+//     [isPre, 'prerelease.ts'],
 //     [message.header.includes("BREAKING CHANGE"),"major",],
 //     [message.type === "feat","minor"],
 //     [message.type === "fix","patch"],
@@ -72,9 +72,9 @@
 //     })[0];
 // }
 //
-// const getType = async(currentversion,dir,prerelease.js)=>{
+// const getType = async(currentversion,dir,prerelease.ts)=>{
 //     const messages = await getCommitMessages(currentversion, dir)
-//     const commitTypes = messages.map(getCommitType(prerelease.js, currentversion))
+//     const commitTypes = messages.map(getCommitType(prerelease.ts, currentversion))
 //     const type = determineHighestCommitType(commitTypes)
 //     return type
 // }
@@ -94,16 +94,16 @@
 //     const dir = '.'
 //     const branchname = await git.currentBranch({fs, dir})
 //
-//     const prerelease.js = isPrerelease(branchname)
-//     core.info("prerelease.js="+prerelease.js);
-//     core.setOutput("prerelease.js", prerelease.js);
+//     const prerelease.ts = isPrerelease(branchname)
+//     core.info("prerelease.ts="+prerelease.ts);
+//     core.setOutput("prerelease.ts", prerelease.ts);
 //
 //     const currentversion = await getCurrentVersion()
 //     core.info("currentversion="+currentversion);
 //     core.setOutput("currentversion", currentversion);
 //
 //
-//     const type = await getType(currentversion, dir, prerelease.js)
+//     const type = await getType(currentversion, dir, prerelease.ts)
 //     core.info("type="+type);
 //     core.setOutput("type", type);
 //

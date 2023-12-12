@@ -5,8 +5,8 @@ import {getCommitMessages} from "./lib/git/getCommitMessages.js";
 import {parseCommitMessage} from "./outputs/type/parseCommitMesage.js";
 import {bumpup} from "./lib/index.js";
 
-const dobump = async (dir, branchname, currentversion,messages)=>{
-    const {prerelease,type,nextversion, changelog} = await bumpup(dir,branchname,currentversion,messages)
+const dobump = async (branchname, currentversion,messages)=>{
+    const {prerelease,type,nextversion, changelog} = await bumpup(branchname,currentversion,messages)
 
     core.info("prerelease="+prerelease);
     core.setOutput("prerelease", prerelease);
@@ -20,14 +20,13 @@ const dobump = async (dir, branchname, currentversion,messages)=>{
     core.info("nextversion="+nextversion);
     core.setOutput("nextversion", nextversion);
 
-    // core.info("changelog="+changelog);
-    // core.setOutput("changelog", changelog);
+    core.info("changelog="+changelog);
+    core.setOutput("changelog", changelog);
 }
 
 const dir = '.'
 const branchname = await getBranchname(dir)
 const currentversion = await getCurrentVersion(dir, branchname)
-const commitMessages = await getCommitMessages(currentversion, dir)
-const messages = commitMessages.map(parseCommitMessage)
-dobump(dir, branchname, currentversion,messages).catch((error)=>core.setFailed(error.message))
+const messages = (await getCommitMessages(currentversion, dir)).map(parseCommitMessage)
+dobump(branchname, currentversion,messages).catch((error)=>core.setFailed(error.message))
 

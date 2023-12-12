@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "nodenext",
+    "module": "nodenext",
+    "target": "es2017",
+    "esModuleInterop": true
+  },
+  "exclude": [
+    "src/**/*.test.ts"
+  ]
+}

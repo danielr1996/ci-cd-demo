@@ -11,4 +11,4 @@ outputs:
     description: is the release a prerelease
 runs:
   using: 'node20'
-  main: 'dist/index.js'
+  main: 'dist/index.ts'
