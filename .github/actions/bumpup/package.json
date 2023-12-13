@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "ncc build src/index.ts",
+    "build": "ncc build src/app/index.ts",
     "test": "node --experimental-vm-modules ./node_modules/.bin/jest",
-    "bumpup": "node --loader ts-node/esm src/index.ts"
+    "bumpup": "node --loader ts-node/esm src/app/index.ts"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
+    "@types/conventional-commits-parser": "^3.0.6",
     "@types/semver": "^7.5.6",
     "jest": "^29.7.0",
     "ts-jest": "^29.1.1"
